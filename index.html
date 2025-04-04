@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img style="height: 1200px; width: 900px;"/>
+    <script>
+        const img = document.querySelector('img')
+
+        function go() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", '/screenshot', true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var b64 = xhr.responseText; 
+                    img.src = b64;
+                    // go()
+                    setTimeout(go, 500);
+                }
+            }
+            xhr.send();
+        }
+        go()
+
+    </script>
+</body>
+</html>
